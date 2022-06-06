@@ -1,7 +1,7 @@
 # GamblingRPG
-ppt : https://hackmd.io/@AlvinX3/GamblingRPG
+[ppt網址](https://hackmd.io/@AlvinX3/GamblingRPG)
 
-報告: https://www.youtube.com/watch?v=BMKOgu0yryI&feature=youtu.be&ab_channel=%E8%AB%B8%E5%AE%B6%E5%BD%AC
+[報告網址](https://youtu.be/BMKOgu0yryI)
 
 2022/6/6 新增存檔功能
 
