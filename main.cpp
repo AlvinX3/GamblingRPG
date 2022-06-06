@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <cstdlib>
 #include <ctime>
 #include <windows.h>
@@ -7,11 +8,12 @@ using namespace std;
 
 #define times 50
 
-int coin=0,ticket=0;
+int coin=0,ticket=0,lucky=0;
 
 int main();
 void cls();
 void Cgambling(int ch);
+void save(int coins,int tk ,int lu);
 
 //   _         ____     _____    ____  
 //  | |       / __ \   / ____|  / __ \ 
@@ -706,6 +708,7 @@ public:
         if (win_or_lose < pa){
             logo.DieLogo();
             cout << "\n但你輸了\n\n你輸了你的一切\n\n你死了";
+            save(0,0,0);
             exit(1);
         }
     }
@@ -1434,6 +1437,7 @@ public:
         cout << "[2]野外冒險" << endl;
         cout << "[3]菁英怪" << endl;
         cout << "[4]賭博" << endl;
+        cout << "[5]存檔" << endl;
         cout << "[0]登出" << endl;
         cin >> choose ;
         cls();
@@ -1553,6 +1557,7 @@ void data(int coins){
             cls();
             logo.portal();
             cout << "恭喜通關";
+            save(0,0,0);
             exit(1);
         }
         break;
@@ -1587,16 +1592,42 @@ void Cchoose(int choose){
         case 2: H.hunt(coin); break;
         case 3: H.adventure(coin); break;
         case 4: SC.gambling(); break;
+        case 5: save(coin,ticket,lucky); break;
         case 0: cout << "登出...\n"; break;
 
         default:break;
     }
 }
 
+int read(){
+    int coins,tk,lu;
+    ifstream NF("save.sav");
+    if (!NF.is_open()) {
+        cerr << "Could not open the file "<< endl;
+    } else{
+        NF >> coins >> tk >> lu;
+        coin = coins;
+        ticket = tk;
+        lucky = lu;
+
+        return coin,ticket,lucky;
+    }
+}
+
+void save(int coins,int tk ,int lu){  
+    ofstream NF;
+    NF.open("save.sav", ios::trunc | ios::in);
+    if (!NF.is_open()) {
+        cerr << "Could not open the file "<< endl;
+    } else{
+        
+        NF << coins << "\n" << tk << "\n" << lu << "\n";
+        NF.close();
+    }
+}
 
 int main(){ 
-
-start:
+    read();
     int choose,i=0;
     ShowChoose SC;
     welcome();
@@ -1608,7 +1639,6 @@ start:
             break;
         }   
     }
-
     //system("pause");
     return 0;
 }
